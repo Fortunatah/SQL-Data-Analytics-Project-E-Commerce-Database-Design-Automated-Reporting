@@ -1,0 +1,6 @@
+product_id,product_name,category,price,stock_quantity
+101,Wireless Mouse,Electronics,25.99,50
+102,Mechanical Keyboard,Electronics,89.99,30
+103,Office Chair,Furniture,150.00,10
+104,Desk Lamp,Furniture,35.50,0
+105,USB-C Cable,Electronics,12.00,100
