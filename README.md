@@ -1,4 +1,4 @@
-etailPulse: E-Commerce Database Design & Automated Analytics Suite
+RetailPulse: E-Commerce Database Design & Automated Analytics Suite
 📌 Project Overview
 This project demonstrates an end-to-end SQL-based data solution for a retail environment. I designed a relational database from scratch, performed data cleaning on "dirty" raw datasets, and engineered advanced analytical queries to uncover business insights regarding customer retention and product performance.
 
