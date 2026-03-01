@@ -1,44 +1,60 @@
-RetailPulse: E-Commerce Database Design & Automated Analytics Suite
 📌 Project Overview
-This project demonstrates an end-to-end SQL-based data solution for a retail environment. I designed a relational database from scratch, performed data cleaning on "dirty" raw datasets, and engineered advanced analytical queries to uncover business insights regarding customer retention and product performance.
+This project showcases a complete SQL-based data lifecycle for a retail business. I designed a relational database from the ground up, performed advanced data sanitization on "dirty" raw datasets, and engineered an analytics suite to provide actionable business intelligence.
 
 🛠️ Tech Stack
 Database: MySQL
 
-Tools: MySQL Workbench
+Tools: MySQL Workbench, GitHub
 
-Concepts: Relational Modeling, Data Sanitization, Stored Procedures, Views, Complex Joins.
+Core Concepts: Relational Modeling (ERD), Data Cleaning, Aggregations, Views, Stored Procedures, and Case Logic.
 
-📂 Database Architecture
-The system is built on a relational schema comprising three core entities:
+📂 Repository Structure
+The project is organized into four sequential scripts to mimic a professional data pipeline:
 
-Customers: Profiles and contact information.
+01_setup_schema.sql: Builds the database structure and establishes Primary/Foreign Key relationships.
 
-Products: Inventory levels and pricing.
+02_data_cleaning.sql: Sanitizes the raw data (Standardizing names, handling NULLs, and removing test records).
 
-Orders: Transactional data linking customers to products.
+03_exploratory_analysis.sql: Business intelligence queries including Revenue, VIP identification, and Dead Stock audits.
 
-🚀 Key Features & Implementation
-1. Data Cleaning & Integrity
-Utilized IS NULL operators and Subqueries to identify and resolve missing data in the customer database.
+04_advanced_features.sql: Production-ready tools including a Master Sales View and an automated Stored Procedure.
 
-Implemented Regular Expressions (REGEXP) to validate email formats and standardize string data.
+🚀 Key Features & Logic
+1. Data Sanitization (The "Dirty Data" Fix)
+Raw data is rarely perfect. I implemented logic to:
 
-2. Advanced Business Analytics
-Customer Segmentation: Used CASE Statements to categorize customers into Gold, Silver, and Bronze tiers based on total lifetime spend.
+Standardize Casing: Used CONCAT, UPPER, and LOWER to fix inconsistent name formatting (e.g., "john DOE" → "John Doe").
 
-Inventory Management: Leveraged Outer Joins to identify "dead stock"—products that have had zero sales in recent quarters.
+Handle Missing Values: Converted empty CSV strings into true NULL values for better mathematical accuracy.
 
-Trend Analysis: Used GROUP BY and HAVING clauses to pinpoint high-volume sales months and peak order quantities.
+Referential Integrity: Safely removed test users by deleting "child" records in the Orders table before the "parent" record in Customers.
 
-3. Automation & Engineering
-Stored Procedures: Developed procedures with Input Parameters to allow users to generate custom sales reports for specific customer IDs instantly.
+2. Business Intelligence & Aggregation
+VIP Identification: Leveraged the HAVING clause to filter customers by their lifetime total spend rather than individual transactions.
 
-Views: Engineered a Sales_Summary_Master view to provide a "Single Source of Truth," abstracting away complex multi-table joins for non-technical stakeholders.
+Inventory Audit: Used LEFT JOIN and IS NULL logic to pinpoint products that have never been sold (Dead Stock).
 
-Validation: Created logic to prevent inventory from dropping below zero during order updates.
+Trend Analysis: Extracted month-over-month sales counts using YEAR() and MONTH() functions.
 
-📊 Sample Insights
-Revenue Drivers: Identified that the "Electronics" category accounts for 60% of total revenue despite only making up 20% of the inventory.
+3. Database Engineering
+Master Sales View: Created a "Single Source of Truth" by joining three tables into a virtual view, abstracting complexity for non-technical users.
 
-Retention: Discovered a 15% churn rate among customers who joined via specific email domains.
+Stored Procedure: Engineered getCustomerSpend to allow instant, parameterized lookups of specific customer revenue.
+
+Dynamic Stock Status: Implemented a tiered CASE statement to categorize inventory into Surplus, In-Stock, Low-Stock, or No-Stock.
+
+📊 Sample Insights Generated
+Identified the Top 3 spenders based on cumulative purchase history.
+
+Cataloged all "Dead Stock" items to suggest clearance opportunities for the furniture category.
+
+Automated a tiered stock-alert system to streamline warehouse re-ordering.
+
+⚙️ How to Run
+Execute 01_setup_schema.sql.
+
+Import the provided CSV files via the MySQL Workbench Import Wizard.
+
+Execute 02_data_cleaning.sql to scrub the records.
+
+Explore the analysis in scripts 03 and 04.
